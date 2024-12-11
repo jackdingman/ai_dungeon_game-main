@@ -2,6 +2,7 @@ package MAP;
 
 import CHARACTER.Attack;
 import CHARACTER.Enemy;
+import org.w3c.dom.Node;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -124,6 +125,11 @@ public class TraversalLogic{
     }
 
     public NodeElement getCurrent() { //retrieves current node
+        return current;
+    }
+
+    public NodeElement setCurrent(NodeElement node) {
+        this.current = current;
         return current;
     }
 

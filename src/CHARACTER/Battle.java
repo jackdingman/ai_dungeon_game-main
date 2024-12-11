@@ -1,26 +1,32 @@
 package CHARACTER;
 
+import MAP.NodeElement;
+import MAP.TraversalLogic;
 
 import java.util.Random;
 
 public class Battle {
     private Character player;
     private Enemy enemy;
+    private TraversalLogic traversalLogic;
 
     // Constructor
-    public Battle(Character player, Enemy enemy) {
+    public Battle(Character player, Enemy enemy, TraversalLogic traversalLogic) {
         this.player = player;
         this.enemy = enemy;
+        this.traversalLogic = traversalLogic;
     }
 
     // Start the battle
     public void start() {
-        while (player.isAlive() && enemy.isAlive()) {
+        boolean fled = false;
+        while (player.isAlive() && enemy.isAlive() && !fled) {
             //displayCombatOptions();
             String action = player.chooseAction();
-            handleAction(action);
+            fled = handleAction(action);
             // Enemy's turn
-            if(enemy.isAlive()) {
+
+            if(enemy.isAlive() && !fled) {
                 System.out.println(enemy.getEnemyName() + "'s turn!");
                 int damage = enemy.enemyAttack(player);
                 player.takeDamage(damage);
@@ -66,23 +72,22 @@ public class Battle {
         System.out.println("3. Run \n");
 
     }
-    private void handleAction(String action) {
+    private boolean handleAction(String action) {
         switch (action.toLowerCase()) {
             case "attack":
                 attack();
-                break;
+                return false;
             case "dodge":
                 dodge();
-                break;
+                return false;
             case "magic":
                 //magic();
-                break;
+                return false;
             case "flee":
-                flee();
-                break;
+                return flee();
             default:
                 System.out.println("Invalid action.");
-                break;
+                return false;
         }
     }
 
@@ -134,12 +139,20 @@ public class Battle {
         }
     }*/
 
-    private void flee() {
+    private boolean flee() {
         Random rand = new Random();
+
+        NodeElement currentNode = traversalLogic.getCurrent(); // for going back a position
+        traversalLogic.backward();
+
+        NodeElement previousNode = traversalLogic.getCurrent();
+
         // Flee if the player succeeds
         int fleeRoll = rand.nextInt(20) + player.getDexterity();
         if (fleeRoll >= enemy.getHealth()) {
-            System.out.println("You successfully fled the battle.");
+            traversalLogic.setCurrent(previousNode); // Update player's location
+            System.out.println("You successfully fled back to: " + previousNode.locationName);
+            return true;
             // Player returns to the previous room or node
 
         } else {
@@ -147,7 +160,10 @@ public class Battle {
             int damage = enemy.getDamage();
             player.takeDamage(damage);
             System.out.println("You took " + damage + " damage.");
+            return false;
+
         }
+
     }
 
     private void endBattle() {

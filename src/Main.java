@@ -29,7 +29,7 @@ public class Main {
         sleep(1500);
         singleLetterOutputter("A grand, ancient throne room. King Acacius, wise and regal, sits upon his majestic throne, his eyes gleaming with purpose. The air is heavy with anticipation as the adventurer enters.\n");
         singleLetterOutputter("KING ACACIUS: What is your name, adventurer? \n");
-        sleep(1500);
+        sleep(1500);;
         //String name = scanner.nextLine();
         String name = "Jack";
         singleLetterOutputter("The perils before you are unknown, ");
@@ -64,7 +64,7 @@ public class Main {
 
                 // Start the battle
                 Enemy monster = current.getMonster();  // Get the enemy associated with the node
-                Battle battle = new Battle(player, monster);  // Initialize the battle
+                Battle battle = new Battle(player, monster, game);  // Initialize the battle
                 battle.start();  // Start the battle
 
                 // After the battle, the player can continue exploring or exit
@@ -72,7 +72,6 @@ public class Main {
                     System.out.println("The battle is over. You can continue exploring.");
                     current.clearMonster();
                 } else {
-                    //System.out.println("You have been defeated. Game Over.");
                     running = false;  // End the game if the player dies
                     break; // breaks out of the loop, actually ends the game
                 }
