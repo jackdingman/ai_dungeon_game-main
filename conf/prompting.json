@@ -1,0 +1,9 @@
+{
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "user",
+      "content": "I am testing the api through JAVA,\nsend me back a response so I know all is\nworking well.\n:: send back a normal string message,\nI do not want a JSON test response ::\n"
+    }
+  ]
+}

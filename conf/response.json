@@ -1,0 +1,31 @@
+{
+  "id": "chatcmpl-AW9toQz14YW0cvjniGDDlmPLmv1Dj",
+  "object": "chat.completion",
+  "created": 1732227912,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Sure! Here is a normal string message as a response to your API test:\n\n\"API test successful. All is working well on the server side.\""
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 46,
+    "completion_tokens": 30,
+    "total_tokens": 76,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  }
+}
